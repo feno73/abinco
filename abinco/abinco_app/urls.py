@@ -3,5 +3,6 @@ from . import views
 
 app_name = 'abinco_app'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.home, name='home'),
+    path('producto/<str:codigo>/', views.detalle, name='detalle'),
 ]
