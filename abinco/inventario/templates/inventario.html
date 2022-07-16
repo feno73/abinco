@@ -24,7 +24,7 @@
         <tbody>
             {% for producto in productos %}
                 <tr>
-                    <td><a href="{% url 'abinco_app:detalle' producto.codigo %}">{{ producto.codigo }}</a></td>
+                    <td><a href="{% url 'inventario:detalle' producto.codigo %}">{{ producto.codigo }}</a></td>
                     <td>{{ producto.nombre }}</td>
                     <td>{{ producto.stock }}</td>
                     <td>{{ producto.categoria }}</td>
