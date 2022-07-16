@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form action="">
+        <div class="mb-3">
+            <label class="form-label">Buscar Producto por código</label>
+            <input type="text" name="buscarProducto" class="form-control" />
+        </div>
+        <button class="btn btn-primary">
+            Buscar Producto
+        </button>
+    </form>
+    <p>Producto buscado: {{ busqueda }}</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Ubicación</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+                <tr>
+                    <td><a href="{% url 'inventario:detalle' producto.codigo %}">{{ producto.codigo }}</a></td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.stock }}</td>
+                    <td>{{ producto.categoria }}</td>
+                    <td>{{ producto.marca }}</td>
+                    <td>{{ producto.ubicacion }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
