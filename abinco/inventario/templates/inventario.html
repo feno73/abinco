@@ -8,8 +8,17 @@
         <button class="btn btn-primary">
             Buscar Producto
         </button>
+        <a href="{% url 'productos' %}" class="btn btn-primary">
+                Limpiar Busqueda
+        </a>
     </form>
-    <p>Producto buscado: {{ busqueda }}</p>
+    <p class="text-muted fst-italic">Producto buscado: 
+        {% if busqueda %}
+            {{ busqueda }}
+        {% else %}
+            Todos
+        {% endif %}
+    </p>
     <table class="table">
         <thead>
             <tr>
@@ -24,7 +33,7 @@
         <tbody>
             {% for producto in productos %}
                 <tr>
-                    <td><a href="{% url 'inventario:detalle' producto.codigo %}">{{ producto.codigo }}</a></td>
+                    <td><a href="{% url 'detalle' producto.id %}">{{ producto.codigo }}</a></td>
                     <td>{{ producto.nombre }}</td>
                     <td>{{ producto.stock }}</td>
                     <td>{{ producto.categoria }}</td>
