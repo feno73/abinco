@@ -1,9 +1,62 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>{{ producto.codigo }}</h2> 
-    <h2>{{ producto.nombre }}</h2>
-    <h2>{{ producto.stock }}</h2>
-    <h2>{{ producto.categoria }}</h2>
-    <h2>{{ producto.marca }}</h2>
-    <h2>{{ producto.ubicacion }}</h2>
+    <div class="container-md position-absolute top-50 start-50 translate-middle">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'productos' %}">Inventario</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ form.codigo.value }}</li>
+            </ol>
+        </nav>
+        {% if mensaje %}
+        <p class="alert">{{ mensaje }}</p>
+        {% endif %}
+        <form action="{% url 'actualizar' pk %}" method="POST">
+            {% csrf_token %}
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Nombre</span>
+                        {{ form.nombre }}
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Código</span>
+                        {{ form.codigo }}
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Stock</span>
+                        {{ form.stock }}
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Categoria</span>
+                        {{ form.categoria }}
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Marca</span>
+                        {{ form.marca }}
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Ubicación</span>
+                        {{ form.ubicacion }}
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Descripción</span>
+                        {{ form.descripcion }}
+                    </div>
+                </li>
+            </ul>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
 {% endblock content %}
