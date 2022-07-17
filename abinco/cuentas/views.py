@@ -1,13 +1,16 @@
 from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import FormularioCreacionUsuario
+from .forms import FormularioCreacionUsuario, FormularioInicioSesion
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect
 from django.db import IntegrityError
 
 def cuentas(request):
-    return redirect('iniciarsesion')
+    if request.user.is_authenticated:
+        return redirect('/inventario')
+    else:
+        return redirect('iniciarsesion')
 
 def registrarse(request):
     if request.method == 'GET':
@@ -26,11 +29,11 @@ def registrarse(request):
 
 def iniciarsesion(request):
     if request.method == 'GET':
-        return render(request, 'iniciarsesion.html', {'form': AuthenticationForm})
+        return render(request, 'iniciarsesion.html', {'form': FormularioInicioSesion})
     else:
         user = authenticate(request, username=request.POST['username'], password= request.POST['password'])
         if user is None:
-            return render(request, 'iniciarsesion.html', {'form': AuthenticationForm(), 'error': 'El usuario o la contraseña son incorrectos'})
+            return render(request, 'iniciarsesion.html', {'form': FormularioInicioSesion(), 'error': 'El usuario o la contraseña son incorrectos'})
         else:
             login(request, user)
             return redirect('/inventario')
